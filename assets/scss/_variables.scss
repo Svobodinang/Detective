@@ -1,0 +1,25 @@
+// fonts
+@font-face {
+  font-family: "Montserrat-Light";
+  src: url("~assets/fonts/Montserrat-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "ubuntuLight";
+  src: url("~assets/fonts/Montserrat-Light.otf") format("opentype");
+}
+
+// colors
+$darkGray: #404040;
+$middleGray: #938B8B;
+$light: #EAE2E2;
+$lightGray: #F2F2F2;
+
+$helpGray: #AAA7A7;
+$helpDark: #302E2E;
+$alarm: #982E2E;
+
+// margins
+$m90: 3rem;
+$m60: 1.8rem;
+$m45: 1.2rem;
+$m35: 0.85rem;

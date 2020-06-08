@@ -1,0 +1,99 @@
+@import "variables";
+@import "default";
+
+html {
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  font-family: "Montserrat-Light";
+}
+
+// text
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  &.big {
+    letter-spacing: 0.02em;
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+}
+h2 {
+  font-size: 1.6rem;
+  letter-spacing: 0.01em;
+  font-weight: normal;
+}
+h3 {
+  font-size: 1.23rem;
+  letter-spacing: 0.01em;
+  font-weight: normal;
+}
+.text-small {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+.text-very-small {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+// padding
+.paddingTB {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.paddingRL {
+  padding-right: 6rem;
+  padding-left: 6rem;
+}
+
+// some styles
+// menu hover and active in footer and header
+.main-menu {
+  li a:hover {
+    color: $middleGray;
+  }
+  li a.active {
+    border-bottom: 1px solid $lightGray;
+    &:hover {
+      border-bottom: 1px solid $middleGray;
+    }
+  }
+}
+
+// text
+.text-end {
+  text-align: end;
+}
+
+// картинка на фоне блока
+.img-bg-block {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+// Дополнотельный фон на блоке, затемнение либо осветление
+.add-bg-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  &::before {
+    position: absolute;
+    content: "";
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+  .inner {
+    z-index: 3;
+  }
+}
+// Затемнение
+.add-bg-block-dark {
+  &::before {
+    background-color: rgba(64, 64, 64, 0.8);
+  }
+}
