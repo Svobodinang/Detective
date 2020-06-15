@@ -1,9 +1,10 @@
 <template>
   <div>
     <services
-      @goto="goto"
+      @gotoBlock="gotoBlock"
       type="cardsRight"
       :style="{'min-height': `calc(100vh - ${headerHeight}px - 1rem)`}"
+      animateType="cardsRight"
     />
     <div
       v-for="(service, index) in services"
@@ -13,10 +14,10 @@
       :id="'block' + index"
     >
       <div class="inner">
-        <h1>{{service.title}}</h1>
+        <h1 :class="animateValuesElements[`block${index}`].class">{{service.title}}</h1>
         <hr />
-        <p>{{service.text}}</p>
-        <DButton @clickDButton="openSovet()" class="button" type="light" text="Перейти"></DButton>
+        <p :class="animateValuesElements[`block${index}`].class">{{service.text}}</p>
+        <DButton :class="animateValuesElements[`block${index}`].class" @clickDButton="openSovet()" class="button" type="light" text="Перейти"></DButton>
       </div>
     </div>
   </div>
@@ -26,8 +27,10 @@
 <script>
 import calcHeaightHeader from "@/middleware/calcHeightHeader";
 import services from "@/components/blocks/services";
+import animate from "@/mixins/animate";
 
 export default {
+  mixins: [animate],
   data: () => ({
     headerHeight: 0,
     services: [
@@ -56,13 +59,41 @@ export default {
           'Наша команда всегда готова проконсультировать Вас по всем вопросам гражданского, трудового, жилищного, корпоративного, земельного и других областей права.\n\nВ нашей организации есть высококвалифицированные адвокаты, которые помогут Вам в любых обстоятельствах. \n\nСвоевременное привлечение адвоката в производственный уголовный процесс позволит предотвратить осуществление незаконных действий со стороны соответствующих государственных органов, а также разрешить особо трудную ситуацию в пользу клиента. В том случае, если уголовное дело было возбуждено, профессиональная адвокатская помощь жизненно важна.\n\nТакже мы предоставляем полный перечень юридических услуг в бюро "Совет"',
         button: true
       }
-    ]
+    ],
+    animateValuesElements: {
+      block0: {
+        method: "animateFromRightSide",
+        scrollY: 250,
+        done: false,
+        class: "beforeAnimateFromRightSide"
+      },
+      block1: {
+        method: "animateFromLeftSide",
+        scrollY: 1000,
+        done: false,
+        class: "beforeAnimateFromLeftSide"
+      },
+      block2: {
+        method: "animateFromRightSide",
+        scrollY: 1600,
+        done: false,
+        class: "beforeAnimateFromRightSide"
+      },
+      block3: {
+        method: "animateFromLeftSide",
+        scrollY: 2400,
+        done: false,
+        class: "beforeAnimateFromLeftSide"
+      }
+    },
+    indexNextKey: 0,
+    keys: ["block0", "block1", "block2", "block3", false]
   }),
   mounted() {
     this.headerHeight = calcHeaightHeader();
   },
   methods: {
-    goto(index) {
+    gotoBlock(index) {
       let el = document.getElementById(`block${index}`);
       el.scrollIntoView({ behavior: "smooth" });
     },

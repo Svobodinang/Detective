@@ -9,24 +9,43 @@
         :style="{'background-image': `url(${card.img})`}"
         @click.prevent="$emit('goto', index)"
       >
-        <div class="inner">
+        <div
+          class="inner"
+          v-if="animateValuesElements"
+          :class="animateValuesElements[`card${index}`].class"
+        >
+          <h2>{{card.title}}</h2>
+          <DButton type="dark" text="Подробнее" />
+        </div>
+        <div class="inner" v-else :class="{animateFromScale: load, beforeAnimateFromScale: !load}">
           <h2>{{card.title}}</h2>
           <DButton type="dark" text="Подробнее" />
         </div>
       </div>
     </div>
-    <div class="text">
-      <h1>Услуги</h1>
+    <div class="text" v-if="animateValuesElements">
+      <h1 :class="animateValuesElements.title.class">Услуги</h1>
       <p
         class="text-very-small"
+        :class="animateValuesElements.title.class"
+      >Цены в нашем бюро индивидуальны. Стоимость услуг рассчитывается исходя из сложности задачи и перспектив её решения.</p>
+    </div>
+    <div class="text" v-else>
+      <h1 :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}">Услуги</h1>
+      <p
+        class="text-very-small"
+        :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
       >Цены в нашем бюро индивидуальны. Стоимость услуг рассчитывается исходя из сложности задачи и перспектив её решения.</p>
     </div>
   </div>
 </template>
 
 <script>
+import animate from "@/mixins/animate";
+
 export default {
-  props: ["type"],
+  props: ["type", "animateType", "scrollY"],
+  mixins: [animate],
   data: () => ({
     services: [
       {
@@ -45,8 +64,56 @@ export default {
         title: `Юридическое\nсопровождение`,
         img: require("../../assets/img/bg/services/four.jpg")
       }
-    ]
-  })
+    ],
+    animateValuesElements: null,
+    keys: null,
+    indexNextKey: 0,
+    load: false
+  }),
+  beforeMount() {
+    if (this.scrollY) {
+      this.animateValuesElements = {
+        title: {
+          method: "animateFromRightSide",
+          scrollY: this.scrollY,
+          done: false,
+          class: "beforeAnimateFromRightSide"
+        },
+        card0: {
+          method: "animateFromScale",
+          scrollY: this.scrollY,
+          done: false,
+          class: "beforeAnimateFromScale",
+          delay: 0
+        },
+        card1: {
+          method: "animateFromScale",
+          scrollY: this.scrollY,
+          done: false,
+          class: "beforeAnimateFromScale",
+          delay: 0.2
+        },
+        card2: {
+          method: "animateFromScale",
+          scrollY: this.scrollY + 200,
+          done: false,
+          class: "beforeAnimateFromScale",
+          delay: 0.4
+        },
+        card3: {
+          method: "animateFromScale",
+          scrollY: this.scrollY + 200,
+          done: false,
+          class: "beforeAnimateFromScale",
+          delay: 0.6
+        }
+      };
+      this.keys = ["title", "card0", "card1", "card2", "card3", false];
+    }
+  },
+  mounted() {
+    this.load = true;
+  }
 };
 </script>
 

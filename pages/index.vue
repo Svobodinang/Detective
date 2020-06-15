@@ -5,33 +5,56 @@
       :style="{'min-height': `calc(100vh - ${headerHeight}px - 12rem)`}"
     >
       <div class="inner">
-        <h1 class="name">Detective.Moscow</h1>
-        <h1 class="big titles">
-          <span>Только специалисты</span>
-        </h1>
-        <h2>Мы знаем все</h2>
-        <DButton type="light" text="Заказать звонок" />
+        <h1
+          :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
+          class="name"
+        >Detective.Moscow</h1>
+        <div class="big titles">
+          <transition name="titles" mode="out-in">
+            <h1 v-bind:key="switchTitle.key">{{switchTitle.title}}</h1>
+          </transition>
+        </div>
+        <h2 :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}">Мы знаем все</h2>
+        <DButton
+          :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
+          type="light"
+          text="Заказать звонок"
+        />
       </div>
     </div>
 
     <div class="about paddingTB paddingRL img-bg-block add-bg-block add-bg-block-dark">
       <div class="inner">
-        <h1>О нас</h1>
-        <p>Detective.Moscow - частное детективное бюро. Мы подробно анализируем каждый случай и, если принимаем заказ, гарантируем результат.</p>
-        <p>Наши сотрудники имеют большой опыт работы в правоохранительных органах. Наша организация также обеспечит профессиональную правовую помощь в достижении поставленных целей. Detective.Moscow состоит из: частных детективов, адвокатов, аналитиков, программистов, полиграфистов и психологов.</p>
-        <p>Все услуги оказываются в соответствии с действующим законом «О частной детективной и охранной деятельности в Российской Федерации».</p>
+        <h1 :class="animateValuesElements.aboutTitle.class">О нас</h1>
+        <div :class="animateValuesElements.aboutText.class">
+          <p>Detective.Moscow - частное детективное бюро. Мы подробно анализируем каждый случай и, если принимаем заказ, гарантируем результат.</p>
+          <p>Наши сотрудники имеют большой опыт работы в правоохранительных органах. Наша организация также обеспечит профессиональную правовую помощь в достижении поставленных целей. Detective.Moscow состоит из: частных детективов, адвокатов, аналитиков, программистов, полиграфистов и психологов.</p>
+          <p>Все услуги оказываются в соответствии с действующим законом «О частной детективной и охранной деятельности в Российской Федерации».</p>
+        </div>
       </div>
     </div>
 
-    <services type="cardsLeft" @goto="goto" />
+    <services
+      animateType="cardsLeft"
+      :scrollY="1000"
+      type="cardsLeft"
+      @goToServicesPage="goToServicesPage"
+    />
 
     <div class="garanties">
       <div class="left paddingTB">
-        <h1>Гарантии</h1>
-        <p>Мы несем ответственность за весь спектр предоставляемых услуг</p>
+        <h1 :class="animateValuesElements.garanties.class">Гарантии</h1>
+        <p
+          :class="animateValuesElements.garanties.class"
+        >Мы несем ответственность за весь спектр предоставляемых услуг</p>
       </div>
       <div class="right paddingTB">
-        <div class="card" v-for="(card, index) in garanties" :key="index">
+        <div
+          :class="animateValuesElements.garanties.class"
+          class="card"
+          v-for="(card, index) in garanties"
+          :key="index"
+        >
           <h3>{{card.title}}</h3>
           <p class="text-small">{{card.text}}</p>
         </div>
@@ -39,7 +62,7 @@
     </div>
 
     <div class="benefits paddingTB paddingRL img-bg-block add-bg-block add-bg-block-dark">
-      <div class="inner">
+      <div class="inner" :class="animateValuesElements.benefits.class">
         <h1>Преимущества</h1>
         <div class="icons">
           <div class="benefit">
@@ -64,7 +87,7 @@
 
     <div class="callback paddingTB paddingRL add-bg-block add-bg-block-dark">
       <div class="inner">
-        <div class="left">
+        <div class="left" :class="animateValuesElements.callback.class">
           <h1>Остались вопросы?</h1>
           <p>Заполните форму и мы вам перезвоним</p>
         </div>
@@ -109,9 +132,11 @@
 <script>
 import services from "@/components/blocks/services";
 import Dform from "@/components/Dform";
-import calcHeaightHeader from "@/middleware/calcHeightHeader"
+import calcHeaightHeader from "@/middleware/calcHeightHeader";
+import animate from "@/mixins/animate";
 
 export default {
+  mixins: [animate],
   data: () => ({
     headerHeight: 0,
     garanties: [
@@ -129,8 +154,69 @@ export default {
       }
     ],
     coords: [55.798207, 37.620097],
-    center: [55.798207, 37.627]
+    center: [55.798207, 37.627],
+    titles: [
+      { title: "Только специалисты", key: "one" },
+      { title: "Бесплатная консультация", key: "two" },
+      { title: "Найдем любую информацию", key: "three" }
+    ],
+    titleIndex: 0,
+    switchTitle: "",
+    load: false,
+    // Записываем какой метод использовать, когда дойдем до нужного scrollY
+    // Элементы должы быть записаны строго в том порядке, в котором идут на странице
+    // Нужному элементу присваиваем класс class
+    // Вся логика в миксине "animate"
+    animateValuesElements: {
+      aboutTitle: {
+        method: "animateFromLeftSide",
+        scrollY: 200,
+        done: false,
+        class: "beforeAnimateFromLeftSide"
+      },
+      aboutText: {
+        method: "animateFromLeftSide",
+        scrollY: 300,
+        done: false,
+        class: "beforeAnimateFromLeftSide"
+      },
+      garanties: {
+        method: "animateFromLeftSide",
+        scrollY: 1600,
+        done: false,
+        class: "beforeAnimateFromLeftSide"
+      },
+      benefits: {
+        method: "animateFromLeftSide",
+        scrollY: 2000,
+        done: false,
+        class: "beforeAnimateFromLeftSide"
+      },
+      callback: {
+        method: "animateFromLeftSide",
+        scrollY: 2500,
+        done: false,
+        class: "beforeAnimateFromLeftSide"
+      }
+    },
+    // index какой следующий объект будем проверять
+    indexNextKey: 0,
+    // все ключи
+    keys: ["aboutTitle", "aboutText", "garanties", "benefits", "callback", false]
   }),
+  beforeMount() {
+    this.switchTitle = this.titles[this.titleIndex];
+    this.load = true;
+    this.titleIndex++;
+    setInterval(() => {
+      this.switchTitle = this.titles[this.titleIndex];
+      if (this.titleIndex === this.titles.length - 1) this.titleIndex = 0;
+      else this.titleIndex++;
+    }, 3000);
+  },
+  mounted() {
+    this.headerHeight = calcHeaightHeader();
+  },
   computed: {
     balloonTemplate() {
       return `
@@ -139,12 +225,9 @@ export default {
       `;
     }
   },
-  mounted() {
-    this.headerHeight = calcHeaightHeader()
-  },
   methods: {
-    goto(index) {
-      this.$router.push(`/services#block${index}`)
+    goToServicesPage(index) {
+      this.$router.push(`/services#block${index}`);
     }
   },
   components: {
@@ -163,20 +246,44 @@ export default {
     margin-bottom: $m45;
   }
   .titles {
+    display: inline-block;
+    position: relative;
+    height: 2rem;
     margin-bottom: $m60;
-    span {
+    h1 {
+      position: absolute;
+      top: 0;
       padding-right: 1rem;
       border-right: 4px solid $lightGray;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
   h2 {
     margin-bottom: $m60;
   }
+
+  // Анимация. разные зоголовки
+  .titles-leave-active {
+    animation: a 1s linear;
+  }
+  .titles-enter-active {
+    animation: a 1s reverse linear;
+  }
+
+  @keyframes a {
+    from {
+      max-width: 50rem;
+    }
+    to {
+      max-width: 0;
+    }
+  }
 }
 
 .about {
   background-image: url("~assets/img/bg/about.jpg");
-  height: calc(100vh - 12rem);
+  min-height: calc(100vh - 12rem);
   color: $lightGray;
   .inner {
     width: 70%;

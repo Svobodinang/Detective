@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <loading :done="done" />
     <DHeader class="header" />
     <div class="body">
       <nuxt />
@@ -11,10 +12,21 @@
 <script>
 import DHeader from "@/components/Dheader"
 import DFooter from "@/components/Dfooter"
+import loading from "@/components/loading"
+
 export default {
   components: {
     DHeader,
-    DFooter
+    DFooter,
+    loading
+  },
+  data: () => ({
+    done: false
+  }),
+  mounted() {
+    setTimeout(() => {
+      this.done = true
+    }, 1000)
   }
 }
 </script>

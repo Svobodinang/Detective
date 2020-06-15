@@ -97,3 +97,69 @@ h3 {
     background-color: rgba(64, 64, 64, 0.8);
   }
 }
+
+// ! анимация
+// Анимация выезжания c отступом классического паддинга
+@keyframes fromLeftSide {
+  from {
+    transform: translateX(-6rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fromRightSide {
+  from {
+    transform: translateX(6rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fromScale {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.beforeAnimateFromLeftSide {
+  transform: translateX(calc(-100% - 6rem));
+  opacity: 0;
+}
+.animateFromLeftSide {
+  animation: fromLeftSide 0.5s;
+  opacity: 1;
+}
+.beforeAnimateFromRightSide {
+  transform: translateX(calc(100% + 6rem));
+  opacity: 0;
+}
+.animateFromRightSide {
+  animation: fromRightSide 0.5s;
+  opacity: 1;
+}
+.beforeAnimateFromScale {
+  transform: scale(0.5);
+  opacity: 0;
+}
+.animateFromScale {
+  animation: fromScale 0.5s;
+  opacity: 1;
+}
+
+// анимация открытия страниц
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
+}
