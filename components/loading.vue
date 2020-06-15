@@ -1,5 +1,5 @@
 <template>
-  <div class="loading img-bg-block add-bg-block" :class="{done: done}">
+  <div class="loading add-bg-block" :class="{done: done}">
     <div class="inner">
       <svg
         width="90"
@@ -98,12 +98,8 @@ export default {
 <style lang="scss" scoped>
 .loading {
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   opacity: 1;
   z-index: 999;
   background-image: url("~assets/img/bg/main.jpg");

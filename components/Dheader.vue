@@ -66,4 +66,10 @@ export default {
     }
   }
 }
+
+@media all and (max-width: 860px) {
+  .button {
+    display: none;
+  }
+}
 </style>

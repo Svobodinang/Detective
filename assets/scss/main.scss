@@ -132,7 +132,6 @@ h3 {
 }
 
 .beforeAnimateFromLeftSide {
-  transform: translateX(calc(-100% - 6rem));
   opacity: 0;
 }
 .animateFromLeftSide {
@@ -140,7 +139,6 @@ h3 {
   opacity: 1;
 }
 .beforeAnimateFromRightSide {
-  transform: translateX(calc(100% + 6rem));
   opacity: 0;
 }
 .animateFromRightSide {
