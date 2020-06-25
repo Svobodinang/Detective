@@ -16,7 +16,7 @@
           <div class="line social">
             <dt></dt>
             <dd>
-              <a class="img" href="https://wa.me/79101510855">
+              <a class="img" href="https://wa.me/79263333540">
                 <img src="~assets/img/svg/whatsAppDark.svg" alt="WtassApp" />
               </a>
               <a class="img" href="tg://msg?text=?>&to=<+79263333540>">

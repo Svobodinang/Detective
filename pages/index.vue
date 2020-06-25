@@ -1,10 +1,13 @@
 <template>
   <div>
     <div
-      class="main paddingTB paddingRL img-bg-block add-bg-block add-bg-block-dark"
-      :style="{'min-height': `calc(100vh - ${headerHeight}px - 12rem)`}"
+      class="main img-bg-block add-bg-block add-bg-block-dark"
+      :style="{'min-height': `calc(100vh - ${headerHeight}px)`}"
     >
-      <div class="inner">
+      <video autoplay loop muted class="bgvideo" id="bgvideo">
+        <source src="~assets/img/bg/main.mp4" type="video/mp4" />
+      </video>
+      <div class="inner paddingTB paddingRL">
         <h1
           :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
           class="name"
@@ -38,7 +41,7 @@
       animateType="cardsLeft"
       :scrollY="1000"
       type="cardsLeft"
-      @goToServicesPage="goToServicesPage"
+      @gotoBlock="goToServicesPage"
     />
 
     <div class="garanties">
@@ -108,7 +111,7 @@
           <a href="mailto:detective.moscow@bk.ru">detective.moscow@bk.ru</a>
         </div>
         <div class="info">
-          <a href="https://wa.me/79101510855">
+          <a href="https://wa.me/79263333540">
             <img src="~assets/img/svg/whatsAppDark.svg" alt="WtassApp" />
           </a>
           <a href="tg://msg?text=?>&to=<+79263333540>" target="_blank">
@@ -146,7 +149,7 @@ export default {
       },
       {
         title: "Законность\nоказываемых\nуслуг",
-        text: "Государственная лицензия МВД России ЧД №002606 до 10.01.2024"
+        text: "Государственная лицензия ЧД №001249 до 21.10.2024"
       },
       {
         title: "Полная\nконфиденциальность\nи анонимность",
@@ -202,7 +205,14 @@ export default {
     // index какой следующий объект будем проверять
     indexNextKey: 0,
     // все ключи
-    keys: ["aboutTitle", "aboutText", "garanties", "benefits", "callback", false]
+    keys: [
+      "aboutTitle",
+      "aboutText",
+      "garanties",
+      "benefits",
+      "callback",
+      false
+    ]
   }),
   beforeMount() {
     this.switchTitle = this.titles[this.titleIndex];
@@ -227,7 +237,7 @@ export default {
   },
   methods: {
     goToServicesPage(index) {
-      this.$router.push(`/services#block${index}`);
+      this.$router.push(`/services?block=${index}`);
     }
   },
   components: {
@@ -239,9 +249,19 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  background-image: url("~assets/img/bg/main.jpg");
+  // background-image: url("~assets/img/bg/main.jpg");
   justify-content: center;
   color: $lightGray;
+  .bgvideo {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -99;
+    min-width: 100%;
+    min-height: 100%;
+  }
   .name {
     margin-bottom: $m45;
   }

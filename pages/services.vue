@@ -17,7 +17,14 @@
         <h1 :class="animateValuesElements[`block${index}`].class">{{service.title}}</h1>
         <hr />
         <p :class="animateValuesElements[`block${index}`].class">{{service.text}}</p>
-        <DButton v-if="service.button" :class="animateValuesElements[`block${index}`].class" @clickDButton="openSovet()" class="button" type="light" text="Перейти"></DButton>
+        <DButton
+          v-if="service.button"
+          :class="animateValuesElements[`block${index}`].class"
+          @clickDButton="openSovet()"
+          class="button"
+          type="light"
+          text="Перейти"
+        ></DButton>
       </div>
     </div>
   </div>
@@ -91,9 +98,18 @@ export default {
   }),
   mounted() {
     this.headerHeight = calcHeaightHeader();
+    try {
+      setTimeout(() => {
+        this.gotoBlock(this.$router.history.current.query.block)
+      }, 300)
+    } catch (err) {
+      console.log(err);
+    }
   },
   methods: {
     gotoBlock(index) {
+      console.log(index);
+
       let el = document.getElementById(`block${index}`);
       el.scrollIntoView({ behavior: "smooth" });
     },

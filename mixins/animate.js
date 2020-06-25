@@ -13,16 +13,12 @@ export default {
   methods: {
     // Вызов определенного метода, если скролл достиг значения, указанного в дате
     scrollMethod() {
-      console.log(this.animateValuesElements);
-
       if (!this.mounted)
         return 0;
       if (!this.animateValuesElements)
         return 0
 
-
       let key = this.keys[this.indexNextKey]
-      console.log(window.scrollY);
 
       if (!key) return 0
 

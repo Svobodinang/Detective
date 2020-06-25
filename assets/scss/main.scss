@@ -2,7 +2,7 @@
 @import "default";
 
 html {
-  font-size: 18px;
+  font-size: 1.4vw;
   letter-spacing: 0.04em;
   font-family: "Montserrat-Light";
 }
@@ -155,9 +155,42 @@ h3 {
 }
 
 // анимация открытия страниц
-.page-enter-active, .page-leave-active {
-  transition: opacity .5s;
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
 }
-.page-enter, .page-leave-active {
+.page-enter,
+.page-leave-active {
   opacity: 0;
+}
+
+::-webkit-scrollbar-button {
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $middleGray;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-color: $darkGray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $lightGray;
+}
+
+::-webkit-resizer {
+  background-image: url("");
+  background-repeat: no-repeat;
+  width: 4px;
+  height: 0px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
 }

@@ -20,7 +20,7 @@
           <a href="mailto:detective.moscow@bk.ru">detective.moscow@bk.ru</a>
         </p>
         <div class="social text-end">
-          <a class="img" href="https://wa.me/79101510855">
+          <a class="img" href="https://wa.me/79263333540">
             <img src="~assets/img/svg/whatsApp.svg" alt="WtassApp" />
           </a>
           <a class="img" href="tg://msg?text=?>&to=<+79263333540>">

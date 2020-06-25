@@ -7,7 +7,7 @@
         :key="index"
         class="card one add-bg-block add-bg-block-dark"
         :style="{'background-image': `url(${card.img})`}"
-        @click.prevent="$emit('goto', index)"
+        @click.prevent="$emit('gotoBlock', index)"
       >
         <div
           class="inner"
