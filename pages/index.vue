@@ -260,6 +260,7 @@ export default {
     right: 0;
     z-index: -99;
     min-width: 100%;
+    min-height: 100%;
   }
   .name {
     margin-bottom: $m45;
