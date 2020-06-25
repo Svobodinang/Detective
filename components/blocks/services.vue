@@ -123,6 +123,7 @@ export default {
   display: flex;
   &.cardsLeft {
     flex-direction: row;
+    background: $darkGray;
   }
   &.cardsRight {
     flex-direction: row-reverse;
