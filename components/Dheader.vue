@@ -12,7 +12,7 @@
         </ul>
       </div>
       <div class="button">
-        <DButton type="light" text="Заказать звонок" />
+        <dButton type="light" text="Заказать звонок" />
       </div>
     </div>
   </div>

@@ -17,14 +17,14 @@
         <h1 :class="animateValuesElements[`block${index}`].class">{{service.title}}</h1>
         <hr />
         <p :class="animateValuesElements[`block${index}`].class">{{service.text}}</p>
-        <DButton
+        <dButton
           v-if="service.button"
           :class="animateValuesElements[`block${index}`].class"
-          @clickDButton="openSovet()"
+          @clickdButton="openSovet()"
           class="button"
           type="light"
           text="Перейти"
-        ></DButton>
+        ></dButton>
       </div>
     </div>
   </div>

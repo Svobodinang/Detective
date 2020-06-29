@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- type = light, dark, inForm -->
-    <button @click.prevent="$emit('clickDButton')" class="small-text" :class="type">{{text}}</button>
+    <button @click.prevent="$emit('clickdButton')" class="small-text" :class="type">{{text}}</button>
   </div>
 </template>
 

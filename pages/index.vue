@@ -18,7 +18,7 @@
           </transition>
         </div>
         <h2 :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}">Мы знаем все</h2>
-        <DButton
+        <dButton
           :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
           type="light"
           text="Заказать звонок"
@@ -95,7 +95,7 @@
           <p>Заполните форму и мы вам перезвоним</p>
         </div>
         <div class="right">
-          <Dform />
+          <dform />
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
     <div class="contacts">
       <div class="card">
         <h1>Контактная информация</h1>
-        <div class="info">5-й проезд Марьиной Рощи, 15А, офис 1, г. Москва</div>
+        <div class="info">5-й проезд Марьиной Рощи, 15А, офис 1, г.Москва</div>
         <div class="info">
           <a href="tel:+79263333540">+7-926-3333-540</a>
         </div>
@@ -134,7 +134,7 @@
 
 <script>
 import services from "@/components/blocks/services";
-import Dform from "@/components/Dform";
+import dform from "@/components/dform";
 import calcHeaightHeader from "@/middleware/calcHeightHeader";
 import animate from "@/mixins/animate";
 
@@ -231,7 +231,7 @@ export default {
     balloonTemplate() {
       return `
         <h4 class="red">DETECTIVE.MOSCOW</h4>
-        <p>г. Москва, 5-й проезд Марьиной Рощи, 15А, офис 1</p>
+        <p>г.Москва, 5-й проезд Марьиной Рощи, 15А, офис 1</p>
       `;
     }
   },
@@ -242,7 +242,7 @@ export default {
   },
   components: {
     services,
-    Dform
+    dform
   }
 };
 </script>

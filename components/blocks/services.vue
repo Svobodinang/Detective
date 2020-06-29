@@ -15,11 +15,11 @@
           :class="animateValuesElements[`card${index}`].class"
         >
           <h2>{{card.title}}</h2>
-          <DButton type="dark" text="Подробнее" />
+          <dButton type="dark" text="Подробнее" />
         </div>
         <div class="inner" v-else :class="{animateFromScale: load, beforeAnimateFromScale: !load}">
           <h2>{{card.title}}</h2>
-          <DButton type="dark" text="Подробнее" />
+          <dButton type="dark" text="Подробнее" />
         </div>
       </div>
     </div>

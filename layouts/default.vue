@@ -1,23 +1,23 @@
 <template>
   <div class="wrapper">
     <loading :done="done" />
-    <DHeader class="header" />
+    <dheader class="header" />
     <div class="body">
       <nuxt />
     </div>
-    <DFooter class="footer" />
+    <dfooter class="footer" />
   </div>
 </template>
 
 <script>
-import DHeader from "@/components/Dheader"
-import DFooter from "@/components/Dfooter"
+import dheader from "@/components/dheader"
+import dfooter from "@/components/dfooter"
 import loading from "@/components/loading"
 
 export default {
   components: {
-    DHeader,
-    DFooter,
+    dheader,
+    dfooter,
     loading
   },
   data: () => ({

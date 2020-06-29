@@ -27,7 +27,7 @@
         </dl>
       </div>
       <div class="right">
-        <Dform />
+        <dform />
       </div>
     </div>
     <div class="map">
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Dform from "@/components/Dform";
+import dform from "@/components/dform";
 
 export default {
   data: () => ({
@@ -53,7 +53,7 @@ export default {
     contacts: [
       {
         title: "Адрес",
-        text: "5-й проезд Марьиной Рощи, 15А, офис 1 г. Москва"
+        text: "5-й проезд Марьиной Рощи, 15А, офис 1 г.Москва"
       },
       {
         title: "Часы работы",
@@ -71,13 +71,13 @@ export default {
     coords: [55.798207, 37.620097]
   }),
   components: {
-    Dform
+    dform
   },
   computed: {
     balloonTemplate() {
       return `
         <h4 class="red">DETECTIVE.MOSCOW</h4>
-        <p>г. Москва, 5-й проезд Марьиной Рощи, 15А, офис 1</p>
+        <p>г.Москва, 5-й проезд Марьиной Рощи, 15А, офис 1</p>
       `;
     }
   }

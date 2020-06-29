@@ -1,7 +1,7 @@
-import DButton from '@/components/ui/DButton.vue'
+import dButton from '@/components/ui/dButton.vue'
 import Vue from 'vue'
 
-const components = { DButton }
+const components = { dButton }
 Object.entries(components).forEach(([name, component]) => {
   Vue.component(name, component)
 })

@@ -16,7 +16,7 @@
         :class="{error: $v.tel.$dirty && (!$v.tel.required || !$v.tel.minLength)}"
         v-mask="'8-###-###-##-##'"
       />
-      <DButton @clickDButton="sendForm()" class="btn" type="inForm" text="Заказать звонок" />
+      <dButton @clickdButton="sendform()" class="btn" type="inForm" text="Заказать звонок" />
     </form>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
     blurTel(e) {
       e.target.placeholder = "Телефон";
     },
-    sendForm() {
+    sendform() {
       try {
         if ((this.$v.$dirty && this.$v.$error) || !this.$v.$dirty) {
           this.$v.$touch();
