@@ -47,6 +47,17 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/style-resources'
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '65346256',
+        webvisor: true,
+        clickmap:true,
+        useCDN:false,
+        trackLinks:true,
+        accurateTrackBounce:true,
+      }
+    ],
   ],
   // Чтобы глобально подключать файлы стилей
   styleResources: {
