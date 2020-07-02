@@ -50,19 +50,19 @@ export default {
     services: [
       {
         title: `Сбор\nинформации`,
-        img: require("../../assets/img/bg/services/one.jpg")
+        img: require("../../assets/img/bg/services/one.webp")
       },
       {
         title: `Бизнес-\nразведка`,
-        img: require("../../assets/img/bg/services/two.jpg")
+        img: require("../../assets/img/bg/services/two.webp")
       },
       {
         title: `Проверка на\nпрослушку`,
-        img: require("../../assets/img/bg/services/three.jpg")
+        img: require("../../assets/img/bg/services/three.webp")
       },
       {
         title: `Юридическое\nсопровождение`,
-        img: require("../../assets/img/bg/services/four.jpg")
+        img: require("../../assets/img/bg/services/four.webp")
       }
     ],
     animateValuesElements: null,

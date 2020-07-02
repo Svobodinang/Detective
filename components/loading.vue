@@ -76,7 +76,7 @@ export default {
   height: 100vh;
   opacity: 1;
   z-index: 999;
-  background-image: url("~assets/img/bg/main.jpg");
+  background-image: url("~assets/img/bg/main.webp");
   display: flex;
   justify-content: center;
   align-items: center;

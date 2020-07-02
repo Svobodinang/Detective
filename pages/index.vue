@@ -249,7 +249,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  // background-image: url("~assets/img/bg/main.jpg");
+  // background-image: url("~assets/img/bg/main.webp");
   justify-content: center;
   color: $lightGray;
   .bgvideo {
@@ -302,7 +302,7 @@ export default {
 }
 
 .about {
-  background-image: url("~assets/img/bg/about.jpg");
+  background-image: url("~assets/img/bg/about.webp");
   min-height: calc(100vh - 12rem);
   color: $lightGray;
   .inner {
@@ -358,7 +358,7 @@ export default {
 }
 
 .benefits {
-  background-image: url("~assets/img/bg/benefits.jpg");
+  background-image: url("~assets/img/bg/benefits.webp");
   text-align: center;
   color: $lightGray;
   h1 {
@@ -377,7 +377,7 @@ export default {
 }
 
 .callback {
-  background-image: url("~assets/img/bg/callback.jpg");
+  background-image: url("~assets/img/bg/callback.webp");
   background-repeat: no-repeat;
   background-position: center center;
   .inner {

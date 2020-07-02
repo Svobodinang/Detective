@@ -9,7 +9,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'description', name: 'description', content: 'Детективное агенство DETECTIVE.MOSCOW. Мы знаем все' },
       { name: "viewport", content: 'width=1200' }
     ],
     link: [

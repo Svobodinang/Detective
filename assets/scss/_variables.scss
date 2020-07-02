@@ -2,10 +2,12 @@
 @font-face {
   font-family: "Montserrat-Light";
   src: url("~assets/fonts/Montserrat-Light.ttf") format("truetype");
+  font-display: fallback;
 }
 @font-face {
   font-family: "ubuntuLight";
   src: url("~assets/fonts/Montserrat-Light.otf") format("opentype");
+  font-display: fallback;
 }
 
 // colors
