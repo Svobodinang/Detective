@@ -58,6 +58,12 @@ export default {
         accurateTrackBounce:true,
       }
     ],
+    ['@nuxtjs/robots', {
+      UserAgent: '*',
+      Disallow: '/components',
+      Disallow: '/plugins',
+      Disallow: '/layouts',
+    }]
   ],
   // Чтобы глобально подключать файлы стилей
   styleResources: {
