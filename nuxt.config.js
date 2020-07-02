@@ -52,10 +52,10 @@ export default {
       {
         id: '65346256',
         webvisor: true,
-        clickmap:true,
-        useCDN:false,
-        trackLinks:true,
-        accurateTrackBounce:true,
+        clickmap: true,
+        useCDN: false,
+        trackLinks: true,
+        accurateTrackBounce: true,
       }
     ],
     ['@nuxtjs/robots', {
