@@ -18,16 +18,22 @@
       />
       <dButton @clickdButton="sendform()" class="btn" type="inForm" text="Заказать звонок" />
     </form>
+
+    <dModal @closeModal="showModal=false" v-if="showModal" type="success" :content="message" />
   </div>
 </template>
 
 <script>
 import { required, minLength } from "vuelidate/lib/validators";
+import dModal from "@/components/dModal";
 
 export default {
   data: () => ({
     name: "",
-    tel: ""
+    tel: "",
+    message:
+      "Ваше обращение успешно отправлено. \nНаши специалисты свяжутся с вами в течении часа.",
+    showModal: false
   }),
   validations: {
     name: { required },
@@ -40,20 +46,27 @@ export default {
     blurTel(e) {
       e.target.placeholder = "Телефон";
     },
-    sendform() {
-      try {
-        if ((this.$v.$dirty && this.$v.$error) || !this.$v.$dirty) {
-          this.$v.$touch();
-          return 0;
-        }
+    async sendform() {
+      if ((this.$v.$dirty && this.$v.$error) || !this.$v.$dirty) {
+        this.$v.$touch();
+        return 0;
+      }
 
-        alert("Отправлено");
-        this.$v.$reset();
-        this.tel = this.name = "";
+      try {
+        let form = { name: this.name, tel: this.tel };
+        let ans = await this.$axios.$post("/send_mail", form);
       } catch (err) {
         console.log(err);
       }
+      this.$emit('sendedForm')
+      this.showModal = true;
+
+      this.$v.$reset();
+      this.tel = this.name = "";
     }
+  },
+  components: {
+    dModal
   }
 };
 </script>

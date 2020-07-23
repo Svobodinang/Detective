@@ -11,13 +11,13 @@
         <h1
           :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
           class="name"
-        >Detective.Moscow</h1>
+        >{{generalInfo.length ? generalInfo[0].logo : '' }}</h1>
         <div class="big titles">
           <transition name="titles" mode="out-in">
-            <h1 v-bind:key="switchTitle.key">{{switchTitle.title}}</h1>
+            <h1 v-bind:key="titleIndex">{{switchTitle}}</h1>
           </transition>
         </div>
-        <h2 :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}">Мы знаем все</h2>
+        <h2 :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}">{{generalInfo.length ? generalInfo[0].slogan : ''}}</h2>
         <dButton
           :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
           type="light"
@@ -30,9 +30,7 @@
       <div class="inner">
         <h1 :class="animateValuesElements.aboutTitle.class">О нас</h1>
         <div :class="animateValuesElements.aboutText.class">
-          <p>Detective.Moscow - частное детективное бюро. Мы подробно анализируем каждый случай и, если принимаем заказ, гарантируем результат.</p>
-          <p>Наши сотрудники имеют большой опыт работы в правоохранительных органах. Наша организация также обеспечит профессиональную правовую помощь в достижении поставленных целей. Detective.Moscow состоит из: частных детективов, адвокатов, аналитиков, программистов, полиграфистов и психологов.</p>
-          <p>Все услуги оказываются в соответствии с действующим законом «О частной детективной и охранной деятельности в Российской Федерации».</p>
+          {{generalInfo.length ? generalInfo[0].aboutUs : ''}}
         </div>
       </div>
     </div>
@@ -42,6 +40,8 @@
       :scrollY="1000"
       type="cardsLeft"
       @gotoBlock="goToServicesPage"
+      :servicesText="generalInfo.length ? generalInfo[0].servicesText : ''"
+      :services="services"
     />
 
     <div class="garanties">
@@ -49,9 +49,9 @@
         <h1 :class="animateValuesElements.garanties.class">Гарантии</h1>
         <p
           :class="animateValuesElements.garanties.class"
-        >Мы несем ответственность за весь спектр предоставляемых услуг</p>
+        >{{generalInfo.length ? generalInfo[0].garantiesText : ''}}</p>
       </div>
-      <div class="right paddingTB">
+      <div v-if="garanties.length" class="right paddingTB">
         <div
           :class="animateValuesElements.garanties.class"
           class="card"
@@ -68,21 +68,9 @@
       <div class="inner" :class="animateValuesElements.benefits.class">
         <h1>Преимущества</h1>
         <div class="icons">
-          <div class="benefit">
-            <img src="~assets/img/svg/benefits/one.svg" alt="Опыт" />
-            <h3>Опыт</h3>
-          </div>
-          <div class="benefit">
-            <img src="~assets/img/svg/benefits/two.svg" alt="Офис в центре" />
-            <h3>Офис в центре</h3>
-          </div>
-          <div class="benefit">
-            <img src="~assets/img/svg/benefits/three.svg" alt="Оперативность" />
-            <h3>Оперативность</h3>
-          </div>
-          <div class="benefit">
-            <img src="~assets/img/svg/benefits/four.svg" alt="Индивидуальный подход" />
-            <h3>Индивидуальный подход</h3>
+          <div class="benefit" v-for="benefit in benefits" :key="benefit.id">
+            <img :src="benefit.picture" alt="Опыт" />
+            <h3>{{benefit.text}}</h3>
           </div>
         </div>
       </div>
@@ -91,8 +79,8 @@
     <div class="callback paddingTB paddingRL add-bg-block add-bg-block-dark">
       <div class="inner">
         <div class="left" :class="animateValuesElements.callback.class">
-          <h1>Остались вопросы?</h1>
-          <p>Заполните форму и мы вам перезвоним</p>
+          <h1>{{generalInfo.length ? generalInfo[0].formTitle : ''}}</h1>
+          <p>{{generalInfo.length ? generalInfo[0].formText : ''}}</p>
         </div>
         <div class="right">
           <dform />
@@ -140,29 +128,27 @@ import animate from "@/mixins/animate";
 
 export default {
   mixins: [animate],
+  async asyncData({ $axios, params }) {
+    try {
+      let generalInfo = await $axios.$get(`/generalInfo/`);
+      let titles = await $axios.$get('/runTitles/')
+      let garanties = await $axios.$get('/garanties/')
+      let benefits = await $axios.$get('/benefits/')
+      let services = await $axios.$get('/services/')
+      return { generalInfo, titles, garanties, benefits, services };
+    } catch (e) {
+      return { generalInfo: [] };
+    }
+  },
   data: () => ({
+    generalInfo: [],
     headerHeight: 0,
-    garanties: [
-      {
-        title: "Все детали\nфиксируются в\nдоговоре",
-        text: "У нас предусмотрены санкции за разглашение информации"
-      },
-      {
-        title: "Законность\nоказываемых\nуслуг",
-        text: "Государственная лицензия ЧД №001249 до 21.10.2024"
-      },
-      {
-        title: "Полная\nконфиденциальность\nи анонимность",
-        text: "Для нас важны интересы клиента"
-      }
-    ],
+    garanties: [],
+    benefits: [],
+    services: [],
     coords: [55.798207, 37.620097],
     center: [55.798207, 37.627],
-    titles: [
-      { title: "Только специалисты", key: "one" },
-      { title: "Бесплатная консультация", key: "two" },
-      { title: "Найдем любую информацию", key: "three" }
-    ],
+    titles: [],
     titleIndex: 0,
     switchTitle: "",
     load: false,
@@ -215,11 +201,11 @@ export default {
     ]
   }),
   beforeMount() {
-    this.switchTitle = this.titles[this.titleIndex];
+    this.switchTitle = this.titles[this.titleIndex].text;
     this.load = true;
     this.titleIndex++;
     setInterval(() => {
-      this.switchTitle = this.titles[this.titleIndex];
+      this.switchTitle = this.titles[this.titleIndex].text;
       if (this.titleIndex === this.titles.length - 1) this.titleIndex = 0;
       else this.titleIndex++;
     }, 3000);
@@ -252,11 +238,11 @@ export default {
   // background-image: url("~assets/img/bg/main.webp");
   justify-content: center;
   color: $lightGray;
+  position: relative;
   .bgvideo {
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
     right: 0;
     z-index: -99;
     min-width: 100%;
@@ -307,6 +293,7 @@ export default {
   color: $lightGray;
   .inner {
     width: 70%;
+    white-space: pre-line;
     h1 {
       margin-bottom: $m90;
     }

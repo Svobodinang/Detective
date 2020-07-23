@@ -1,12 +1,12 @@
 <template>
   <!-- type = cardsRight, cardsLeft -->
-  <div class="services" :class="type">
+  <div class="services" :class="type ? type: ''">
     <div class="cards">
       <div
         v-for="(card, index) in services"
         :key="index"
         class="card one add-bg-block add-bg-block-dark"
-        :style="{'background-image': `url(${card.img})`}"
+        :style="{'background-image': `url(${card.picture})`}"
         @click.prevent="$emit('gotoBlock', index)"
       >
         <div
@@ -25,17 +25,14 @@
     </div>
     <div class="text" v-if="animateValuesElements">
       <h1 :class="animateValuesElements.title.class">Услуги</h1>
-      <p
-        class="text-very-small"
-        :class="animateValuesElements.title.class"
-      >Цены в нашем бюро индивидуальны. Стоимость услуг рассчитывается исходя из сложности задачи и перспектив её решения.</p>
+      <p class="text-very-small" :class="animateValuesElements.title.class">{{servicesText}}</p>
     </div>
     <div class="text" v-else>
       <h1 :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}">Услуги</h1>
       <p
         class="text-very-small"
         :class="{animateFromLeftSide: load, beforeAnimateFromLeftSide: !load}"
-      >Цены в нашем бюро индивидуальны. Стоимость услуг рассчитывается исходя из сложности задачи и перспектив её решения.</p>
+      >{{servicesText}}</p>
     </div>
   </div>
 </template>
@@ -44,27 +41,9 @@
 import animate from "@/mixins/animate";
 
 export default {
-  props: ["type", "animateType", "scrollY"],
+  props: ["type", "animateType", "scrollY", "servicesText", "services"],
   mixins: [animate],
   data: () => ({
-    services: [
-      {
-        title: `Сбор\nинформации`,
-        img: require("../../assets/img/bg/services/one.webp")
-      },
-      {
-        title: `Бизнес-\nразведка`,
-        img: require("../../assets/img/bg/services/two.webp")
-      },
-      {
-        title: `Проверка на\nпрослушку`,
-        img: require("../../assets/img/bg/services/three.webp")
-      },
-      {
-        title: `Юридическое\nсопровождение`,
-        img: require("../../assets/img/bg/services/four.webp")
-      }
-    ],
     animateValuesElements: null,
     keys: null,
     indexNextKey: 0,
@@ -147,6 +126,9 @@ export default {
         width: 15rem;
         text-align: center;
         position: relative;
+        h2 {
+          white-space: pre-wrap;
+        }
         div {
           position: absolute;
           left: 0;

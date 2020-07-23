@@ -1,5 +1,19 @@
 <template>
   <div class="paddingRL header" id="header">
+    <dModal
+      @sendedForm="showModalForm = false; showModalAccess = true"
+      @closeModal="showModalForm = false"
+      v-if="showModalForm"
+      type="form"
+      :content="message"
+    />
+    <dModal
+      @closeModal="showModalAccess = false"
+      v-if="showModalAccess"
+      type="success"
+      :content="message"
+    />
+
     <div class="logo" @click="$router.push('/')">
       <img src="~assets/img/logo/logo.svg" alt="Логотип" />
     </div>
@@ -12,21 +26,30 @@
         </ul>
       </div>
       <div class="button">
-        <dButton type="light" text="Заказать звонок" />
+        <dButton @clickdButton="showModalForm = true" type="light" text="Заказать звонок" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import dModal from "@/components/dModal";
+
 export default {
   data: () => ({
     menu: [
       { title: "Главная", link: "/" },
       { title: "Услуги", link: "/services" },
       { title: "Контакты", link: "/contacts" }
-    ]
-  })
+    ],
+    showModalForm: false,
+    showModalAccess: false,
+    message:
+      "Ваше обращение успешно отправлено. \nНаши специалисты свяжутся с вами в течении часа."
+  }),
+  components: {
+    dModal
+  }
 };
 </script>
 
