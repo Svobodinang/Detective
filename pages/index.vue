@@ -335,7 +335,7 @@ export default {
         padding-bottom: $m35;
         margin-bottom: $m35;
         border-bottom: 1px solid $darkGray;
-        white-space: pre;
+        min-height: 4.5rem;
       }
       p {
         color: $middleGray;
